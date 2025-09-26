@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-# | Operation | Stack(s) | Description (in words)                        |
-# | --------- | -------- | --------------------------------------------- |
-# | sa        | a        | Swap top two elements of a                    |
-# | sb        | b        | Swap top two elements of b                    |
-# | ss        | a & b    | Swap top two elements of both a and b         |
-# | pa        | a, b     | Push top element from b onto a                |
-# | pb        | a, b     | Push top element from a onto b                |
-# | ra        | a        | Rotate a up (first element becomes last)      |
-# | rb        | b        | Rotate b up                                   |
-# | rr        | a & b    | Rotate both a and b up                        |
-# | rra       | a        | Reverse rotate a (last element becomes first) |
-# | rrb       | b        | Reverse rotate b                              |
-# | rrr       | a & b    | Reverse rotate both a and b                   |
+import sys
 
+def main():
+    if len(sys.argv) <= 1:
+        print(f"Usage: {sys.argv[0]} <number arguments>")
+        sys.exit(1)
+    a = []
+    b = []
+    try:
+        for i in sys.argv[1:]:
+            a.append(int(i))
+    except ValueError:
+        print("invalid input: all arguments must be integers")
+        sys.exit(1)
+    a_sorted = sorted(a)
+    sort_list(a, b, a_sorted)
 
-#operations: 
 """
     Swap the first two elements of stack.
     If the stack has fewer than 2 elements, do nothing.
@@ -112,10 +113,13 @@ def push_to_stack_b(a, b, index):
     while(a[0] != target):
         index = a.index(target)
         if(index <= len(a) /2):
+            print("ra")
             ra(a)
         else:
+            print("rra")
             rra(a)
     pb(a, b)
+    print("pb")
 
 def find_closes_in_range(stack, min , max):
     closest_index = -1
@@ -133,15 +137,54 @@ def bring_to_top_b(b, a, index):
         while b[0] != target:
             index = b.index(target)
             if index <= len(b) //2:
+                print("rb")
                 rb(b)
             else:
+                print("rrb")
                 rrb(b)
 
- 
+def sort_three(a, sorted_list):
+    if(len(a) < 2):
+        return
+    elif (len(a) == 2 and a != sorted_list):
+        print("sa")
+        sa(a)
+        return
+    elif(a == sorted_list):
+        return
+    if(a.index(max(a)) == 0):
+        print("ra")
+        ra(a)
+    elif(a[1] == max(a)):
+        print("rra")
+        rra(a)
+    if(a[0] > a[1]):
+        print("sa")
+        sa(a)
 
-def sort_large_list(a, b, sorted_list):
+def sort_five(a, b, sorted_list):
+    if(a == sorted_list):
+        return
+    while len(a) > 3:
+        if(a.index(min(a)) <= len(a) / 2):
+            while a.index(min(a)) > 0:
+                print("ra")
+                ra(a)
+        else:
+            while a.index(min(a)) < len(a) and a.index(min(a)) > len(a) /2:
+                print("rra")
+                rra(a)
+        pb(a, b)
+        print("pb")
+    sort_three(a,b)
+    while len(b) > 0:
+        print("pa")
+        pa(a,b)
+
+
+def sort_list(a, b, sorted_list):
     while a != sorted_list:
-        if len(a) > 2:
+        if len(a) > 5:
             chunk_size = 20
             curr_min = min(a)
             curr_max = curr_min + chunk_size
@@ -155,14 +198,10 @@ def sort_large_list(a, b, sorted_list):
                 max_index = b.index(max(b))
                 bring_to_top_b(b, a, max_index)
                 pa(a, b)
+                print("pa")
+        elif(len(a) > 3 and len(a) <= 5):
+            sort_five(a,b, sorted_list)
+        elif(len(a) <= 3):
+            sort_three(a, sorted_list)
 
-                
-
-
-# a = [3,1,3, 2, 4, 10, -1, 30, 40, 25,-203]
-a = [3, 2, 1]
-b = []
-sorted_list = sorted(a)
-print(f"before a=> {a} b=> {b}")
-s = sort_large_list(a, b, sorted_list)
-print(f"after a=> {a} b=> {b}")
+main()
