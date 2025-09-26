@@ -17,7 +17,7 @@ Each mini-project demonstrates how core programming concepts translate from low-
 | Project         | Description                                           | Original C Version                              | Status        |
 |-----------------|------------------------------------------------------|-------------------------------------------------|---------------|
 | [get_next_line](https://github.com/yahyaeb/Python-42-Algorithms/tree/main/get_next_line)   | Read a file line-by-line, buffer management          | [C Repo](https://github.com/yahyaeb/get_next_line)         | completed     |
-| push_swap       | Stack-based sorting with minimal operations          | [C Repo](https://github.com/yahyaeb/push_swap)             | In progress   |
+| [push_swap](https://github.com/yahyaeb/Python-42-Algorithms/tree/main/push_swap)       | Stack-based sorting with minimal operations          | [C Repo](https://github.com/yahyaeb/push_swap)             | completed   |
 | libft           | Core string/array/utility functions (“libft”)        | [C Repo](https://github.com/yahyaeb/libft)                 | In progress   |
 | rpn_calculator  | Reverse Polish Notation (stack calculator)           | [C Repo](https://github.com/yahyaeb/cpp-module-09)         | In progress   |
 | pipex           | Chaining shell commands via pipes                    | [C Repo](https://github.com/yahyaeb/pipex)                 | In progress   |
